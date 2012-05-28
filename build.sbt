@@ -26,7 +26,10 @@ libraryDependencies <++= scalaVersion { sv =>
   "javax.persistence" % "persistence-api" % "1.0" % "provided" ::
   "javax.transaction" % "transaction-api" % "1.1" % "provided" ::
   "org.hibernate" % "hibernate-entitymanager" % "3.4.0.GA" ::
-  "org.scala-libs" %% "scalajpa" % "1.4" ::
+  (sv match {
+    case "2.9.2" =>  "org.scala-libs" % "scalajpa_2.9.1" % "1.4"
+    case _ => "org.scala-libs" %% "scalajpa" % "1.4"
+  }) :: 
   (sv match { 
       case "2.8.0" => "org.scala-tools.testing" %% "specs" % "1.6.5" % "test"
       case "2.9.1" => "org.scala-tools.testing" %% "specs" % "1.6.9" % "test"
