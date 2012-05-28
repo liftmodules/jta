@@ -7,6 +7,9 @@ Check the ScalaDoc (or the source) for the documentation on usage, semantics etc
 
 There are two versions of the API, one monadic and one using high-order functions.
 
+Note: The module package changed from net.liftweb.transaction to net.liftmodules.transaction in May 2012.  Please consider this when referencing documentation written before that date.
+
+
 h3. Monadic API
 
 <pre>
@@ -62,7 +65,7 @@ Here are the essential configuration options in the JPA persistence.xml file:
 
     <properties>
       <property name="hibernate.transaction.manager_lookup_class"
-                value="net.liftweb.transaction.hibernate.LiftTransactionManagerLookup" />
+                value="net.modules.transaction.hibernate.LiftTransactionManagerLookup" />
     </properties>
   </persistence-unit>
 </persistence>

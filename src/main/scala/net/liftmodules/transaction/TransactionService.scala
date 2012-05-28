@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package net.liftweb
+package net.liftmodules
 package transaction
 
 import javax.transaction.{Transaction, TransactionManager, Status, SystemException, TransactionRequiredException}
 import javax.persistence.{Persistence, EntityManagerFactory, NonUniqueResultException, NoResultException}
 
-import common.Logger
+import net.liftweb.common.Logger
 
 
 /**

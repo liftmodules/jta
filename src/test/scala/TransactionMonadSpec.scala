@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.liftweb {
+package net.liftmodules {
 package transaction {
 
 //import com.jteigen.scalatest.JUnit4Runner

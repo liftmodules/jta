@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.liftweb
+package net.liftmodules
 package transaction
 
 import javax.persistence.EntityManager
@@ -22,7 +22,7 @@ import javax.transaction.{Transaction, Status, TransactionManager}
 
 import org.scala_libs.jpa.{ScalaEntityManager, ScalaEMFactory}
 
-import common.Loggable
+import net.liftweb.common.Loggable
 
 
 /**

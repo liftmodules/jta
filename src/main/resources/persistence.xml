@@ -10,7 +10,7 @@
 
     <properties>
       <property name="hibernate.transaction.manager_lookup_class"
-                value="net.liftweb.transaction.hibernate.LiftTransactionManagerLookup" />
+                value="net.liftmodules.transaction.hibernate.LiftTransactionManagerLookup" />
     </properties>
   </persistence-unit>
 </persistence>
