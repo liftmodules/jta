@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2011 WorldWide Conferencing, LLC
+ * Copyright 2009-2013 WorldWide Conferencing, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ class EntityManagerSynchronization(
       if (status != Status.STATUS_ROLLEDBACK &&
           status != Status.STATUS_ROLLING_BACK &&
           status != Status.STATUS_MARKED_ROLLBACK) {
-        logger.debug("Flushing EntityManager...") 
+        logger.debug("Flushing EntityManager...")
         em.flush // flush EntityManager on success
       }
     } catch {
