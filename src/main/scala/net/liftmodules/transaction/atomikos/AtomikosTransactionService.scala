@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 WorldWide Conferencing, LLC
+ * Copyright 2009-2013 WorldWide Conferencing, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ object AtomikosTransactionService extends
       tm.setTransactionTimeout(JTA_TRANSACTION_TIMEOUT)
       tm
     } catch {
-      case e => throw new SystemException("Could not create a new Atomikos J2EE Transaction Manager, due to: " + e.toString)
+      case e: Throwable => throw new SystemException("Could not create a new Atomikos J2EE Transaction Manager, due to: " + e.toString)
     }
 
   // TODO: gracefully shutdown of the TM
