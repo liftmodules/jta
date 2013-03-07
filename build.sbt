@@ -1,14 +1,14 @@
 name := "jta"
 
-liftVersion <<= liftVersion ?? "2.5-SNAPSHOT"
+liftVersion <<= liftVersion ?? "2.5-RC2"
 
-version <<= liftVersion apply { _ + "-1.2-SNAPSHOT" }
+version <<= liftVersion apply { _ + "-1.2" }
 
 organization := "net.liftmodules"
  
 scalaVersion := "2.10.0"
  
-crossScalaVersions := Seq("2.10.0", "2.9.2", "2.9.1-1", "2.9.1", "2.9.0-1", "2.9.0")
+crossScalaVersions := Seq("2.10.0", "2.9.2", "2.9.1-1", "2.9.1")
 
 resolvers += "CB Central Mirror" at "http://repo.cloudbees.com/content/groups/public"
 
