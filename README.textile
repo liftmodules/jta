@@ -1,5 +1,19 @@
 h1. Lift JTA Transaction API
 
+To include this module in your Lift project, update your `libraryDependencies` in `build.sbt` to include:
+
+*Lift 2.5.x* for Scala 2.9 and 2.10:
+
+<pre>
+    "net.liftmodules" %% "jpa_2.5" % "1.2"
+</pre>
+
+*Lift 3.0.x* for Scala 2.10:
+
+<pre>
+    "net.liftmodules" %% "jpa_3.0" % "1.2-SNAPSHOT"
+</pre>
+
 The semantics are the same as used in the EJB spec. E.g. Required, RequiresNew, Mandatory, Supports, Never. All these are exposed as monadic objects and high-order functions in the TransactionContext object.
 
 The implementation is hooked into the Lift's JPA implementation.
@@ -39,7 +53,7 @@ h3. High-order functions API
 
 <pre>
 TransactionContext.withTxRequired {
-    ... // REQUIRED semantics 
+    ... // REQUIRED semantics
 
   TransactionContext.withTxRequiresNew {
     ... // REQUIRES_NEW semantics
