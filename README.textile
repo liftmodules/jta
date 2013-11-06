@@ -2,6 +2,13 @@ h1. Lift JTA Transaction API
 
 To include this module in your Lift project, update your `libraryDependencies` in `build.sbt` to include:
 
+
+*Lift 2.6.x* for Scala 2.9 and 2.10:
+
+<pre>
+    "net.liftmodules" %% "jpa_2.6" % "1.2"
+</pre>
+
 *Lift 2.5.x* for Scala 2.9 and 2.10:
 
 <pre>

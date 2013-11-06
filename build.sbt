@@ -4,15 +4,15 @@ organization := "net.liftmodules"
 
 version := "1.2-SNAPSHOT"
 
-liftVersion <<= liftVersion ?? "2.5-SNAPSHOT"
+liftVersion <<= liftVersion ?? "2.6-SNAPSHOT"
 
 liftEdition <<= liftVersion apply { _.substring(0,3) }
 
-name <<= (name, liftEdition) { (n, e) =>  n + "_" + e }
+moduleName <<= (name, liftEdition) { (n, e) =>  n + "_" + e }
 
-scalaVersion := "2.10.0"
+scalaVersion := "2.10.3"
 
-crossScalaVersions := Seq("2.10.0", "2.9.2", "2.9.1-1", "2.9.1", "2.9.0-1", "2.9.0")
+crossScalaVersions := Seq("2.10.0", "2.9.2", "2.9.1-1", "2.9.1")
 
 resolvers += "CB Central Mirror" at "http://repo.cloudbees.com/content/groups/public"
 
@@ -39,8 +39,7 @@ libraryDependencies <++= scalaVersion { sv =>
 libraryDependencies <++= scalaVersion { sv =>
   (sv match {
       case "2.9.2" | "2.9.1" | "2.9.1-1" => "org.specs2" %% "specs2" % "1.12.3" % "test"
-      case "2.10.0" => "org.specs2" %% "specs2" % "1.13" % "test"
-      case "2.9.0-1" | "2.9.0" => "org.specs2" %% "specs2" % "1.7.1" % "test"
+      case _ => "org.specs2" %% "specs2" % "1.13" % "test"
       })  ::
   Nil
 }
