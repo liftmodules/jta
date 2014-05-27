@@ -127,6 +127,16 @@ trait TransactionMonad {
  *   query.getSingleResult
  * }
  * </pre>
+ * Example usage 3:
+ * <pre>
+ * def findUserByName(name: String) = TransactionContext.required { ctx =>
+ *   // transactional stuff
+ *   ctx.getScalaentityManager
+ *      .createQuery[User]("select u from User u where u.name = :name")
+ *      .setParams("name" -> "fred")
+ *      .findOne
+ * }
+ * </pre>
  *
  * @author <a href="http://jonasboner.com">Jonas Bon&#233;r</a>
  */
@@ -172,6 +182,16 @@ object TransactionContext extends TransactionProtocol with Loggable {
     def foreach(f: TransactionMonad => Unit): Unit = f(this)
     override def filter(f: TransactionMonad => Boolean): TransactionMonad = this
   }
+
+  def required[T](body: TransactionMonad => T): T = for (ctx <- Required) yield { body(ctx) }
+
+  def requiresNew[T](body: TransactionMonad => T): T = for (ctx <- RequiresNew) yield { body(ctx) }
+
+  def supports[T](body: TransactionMonad => T): T = for (ctx <- Supports) yield { body(ctx) }
+
+  def mandatory[T](body: TransactionMonad => T): T = for (ctx <- Mandatory) yield { body(ctx) }
+
+  def never[T](body: => T): T = for (ctx <- Mandatory) yield { body }
 
   private[transaction] def setRollbackOnly = current.setRollbackOnly
 
