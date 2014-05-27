@@ -81,6 +81,11 @@ trait TransactionMonad {
   def getEntityManager: EntityManager = TransactionContext.getEntityManager
 
   /**
+   * Returns the current EntityManager as ScalaEntityManager.
+   */
+  def getScalaEntityManager: ScalaEntityManager = TransactionContext.getScalaEntityManager
+
+  /**
    * Checks if an EntityManager exists in current context.
    */
   //def hasEntityManager: Boolean = TransactionContext.hasEntityManager
@@ -177,6 +182,8 @@ object TransactionContext extends TransactionProtocol with Loggable {
   private[transaction] def getTransaction: Transaction = current.getTransactionManager.getTransaction
 
   private[transaction] def getEntityManager: EntityManager = current.getEntityManager
+
+  private[transaction] def getScalaEntityManager: ScalaEntityManager = current
 
   private[transaction] def closeEntityManager = current.closeEntityManager
 
