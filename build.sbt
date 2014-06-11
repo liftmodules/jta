@@ -12,7 +12,7 @@ moduleName <<= (name, liftEdition) { (n, e) =>  n + "_" + e }
 
 scalaVersion := "2.10.3"
 
-crossScalaVersions := Seq("2.10.0", "2.9.2", "2.9.1-1", "2.9.1")
+crossScalaVersions := Seq("2.11.0", "2.10.0", "2.9.2", "2.9.1-1", "2.9.1")
 
 resolvers += "CB Central Mirror" at "http://repo.cloudbees.com/content/groups/public"
 
@@ -45,7 +45,8 @@ libraryDependencies <++= scalaVersion { sv =>
 
 libraryDependencies <++= scalaVersion { sv =>
   (sv match {
-      case "2.9.2" | "2.9.1" | "2.9.1-1" => "org.specs2" %% "specs2" % "1.12.3" % "test"
+      case "2.9.2"  | "2.9.1" | "2.9.1-1" => "org.specs2" %% "specs2" % "1.12.3" % "test"
+      case "2.11.0" | "2.11.1" =>  "org.specs2" %% "specs2" % "2.3.11" % "test"
       case _ => "org.specs2" %% "specs2" % "1.13" % "test"
       })  ::
   Nil
