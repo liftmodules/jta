@@ -81,6 +81,11 @@ trait TransactionMonad {
   def getEntityManager: EntityManager = TransactionContext.getEntityManager
 
   /**
+   * Returns the current EntityManager as ScalaEntityManager.
+   */
+  def getScalaEntityManager: ScalaEntityManager = TransactionContext.getScalaEntityManager
+
+  /**
    * Checks if an EntityManager exists in current context.
    */
   //def hasEntityManager: Boolean = TransactionContext.hasEntityManager
@@ -120,6 +125,16 @@ trait TransactionMonad {
  *   val query = ctx.getEntityManager.createNamedQuery("findUserByName")
  *   query.setParameter("userName", name)
  *   query.getSingleResult
+ * }
+ * </pre>
+ * Example usage 3:
+ * <pre>
+ * def findUserByName(name: String) = TransactionContext.required { ctx =>
+ *   // transactional stuff
+ *   ctx.getScalaentityManager
+ *      .createQuery[User]("select u from User u where u.name = :name")
+ *      .setParams("name" -> "fred")
+ *      .findOne
  * }
  * </pre>
  *
@@ -168,6 +183,16 @@ object TransactionContext extends TransactionProtocol with Loggable {
     override def filter(f: TransactionMonad => Boolean): TransactionMonad = this
   }
 
+  def required[T](body: TransactionMonad => T): T = for (ctx <- Required) yield { body(ctx) }
+
+  def requiresNew[T](body: TransactionMonad => T): T = for (ctx <- RequiresNew) yield { body(ctx) }
+
+  def supports[T](body: TransactionMonad => T): T = for (ctx <- Supports) yield { body(ctx) }
+
+  def mandatory[T](body: TransactionMonad => T): T = for (ctx <- Mandatory) yield { body(ctx) }
+
+  def never[T](body: => T): T = for (ctx <- Mandatory) yield { body }
+
   private[transaction] def setRollbackOnly = current.setRollbackOnly
 
   private[transaction] def isRollbackOnly = current.isRollbackOnly
@@ -177,6 +202,8 @@ object TransactionContext extends TransactionProtocol with Loggable {
   private[transaction] def getTransaction: Transaction = current.getTransactionManager.getTransaction
 
   private[transaction] def getEntityManager: EntityManager = current.getEntityManager
+
+  private[transaction] def getScalaEntityManager: ScalaEntityManager = current
 
   private[transaction] def closeEntityManager = current.closeEntityManager
 
